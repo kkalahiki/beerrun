@@ -3,6 +3,7 @@ var Type = require('../models/types.js');
 module.exports.create = function (req, res, element) {
 	var newType = req.body;
 	var type = new Type[element](req.body);
+	type.needed = true;
 	type.save(function (err, result) {
 		//res.json(result);
 		Type[element].find(function (err, results) {
