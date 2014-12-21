@@ -38,6 +38,7 @@ app.delete('/api/recipes/*', jsonParser, function (req, res) { elementsControlle
 app.use('/js', express.static(__dirname + '/client/js'));
 app.use('/views', express.static(__dirname + '/client/views'));
 app.use('/css', express.static(__dirname + '/client/css'));
+app.use('/images', express.static(__dirname + '/client/images'));
 app.use('/thirdparty', express.static(__dirname + '/client/thirdparty'));
 app.use('/bower_components', express.static(__dirname + '/client/bower_components'));
 
