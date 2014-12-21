@@ -1,0 +1,14 @@
+			<h1>Shop ({{types.length}})</h1>
+			<form ng-submit="addType()">
+				<label for="type-name">New type</label>  <input type="text" placeholder="Layout type" id="type-name" ng-model="newType" />
+				<button type="submit" class="btn btn-default">Add</button>
+			</form>
+			
+			<ul class="listOfTypes">
+				<li ng-repeat="type in types | orderBy:predicate" class="col-xs-12 col-sm-5 col-md-3 col-lg-2">{{type.name}}
+					<div class="itemButtons">
+						<button ng-click="deleteItem()" class="btn btn-default">Got It <span class="glyphicon glyphicon-remove"></span></button>
+					</div>
+				</li>
+			</ul>
+			

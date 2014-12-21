@@ -1,0 +1,1 @@
+var app = angular.module('beerrun', ['ngResource', 'ui.bootstrap', 'ngRoute']);

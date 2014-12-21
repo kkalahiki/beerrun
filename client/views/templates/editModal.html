@@ -1,0 +1,13 @@
+<div class="modal-header">
+	<h2>Edit {{item.name}}</h2>
+</div>
+<div class="modal-body">
+	<label for="name-edit" class="col-md4">Name</label><input type="text" ng-model="editName" id="name-edit" />
+	<label for="amount-edit" class="col-md4">Amount</label><input type="text" ng-model="editAmount" id="amount-edit" />
+	<label for="section-edit" class="col-md4">Section</label><input type="text" ng-model="editSection" id="section-edit" />
+	<label for="description-edit" class="col-md4">Description</label><textarea ng-model="editDescription" id="description-edit"></textarea>
+	
+</div>
+<div class="modal-footer">
+	<button ng-click="saveEdit()" class="btn btn-default">Save Edit</button><button ng-click="closeModal()" class="btn btn-default">Cancel</button>
+</div>
