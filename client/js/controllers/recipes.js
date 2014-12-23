@@ -47,13 +47,9 @@ app.controller('recipes', ['$scope', '$resource', '$modal', function($scope, $re
 		modalInstance.result.then(function (editItem) {
 			var type = new Type();
 			type.name = editItem.name;
-			if (editItem.description) { type.description = editItem.description };
-			if (editItem.amount) { type.amount = editItem.amount };
-			if (editItem.section) { type.section = editItem.section };
+			type.ingredients = editItem.ingredients;
 			type.$update({'id': editItem._id}, function (result) {
-				//Type.query(function (results) {
-					$scope.types = result.resultSet;
-				//});
+				$scope.types = result.resultSet;
 			});
 	    });
 
@@ -85,28 +81,33 @@ app.controller('recipes', ['$scope', '$resource', '$modal', function($scope, $re
 
 app.controller('recipeModal', function ($scope, $modalInstance, item, ingredients) {
 	$scope.item = item;
-	$scope.ingredients = ingredients;
+	$scope.allIngredients = ingredients;
 	$scope.predicate = 'name';
+	$scope.recipeIngredients = item.ingredients;
 
 	$scope.editName = item.name;
 	if (item.description) {
 		$scope.editDescription = item.description;	
 	}
-	if (item.amount) {
-		$scope.editAmount = item.amount;	
+	
+	$scope.addIngredient = function () {
+		//console.log($scope.selectedIngredient);
+		var thisItem = {};
+		thisItem.name = $scope.selectedIngredient.title;
+		thisItem.amount = $scope.editAmount;
+		thisItem.id = $scope.selectedIngredient.originalObject._id;
+		$scope.recipeIngredients.push(thisItem);
+		//console.log($scope.recipeIngredients);
 	}
-	if (item.section) {
-		$scope.editSection = item.section;	
-	}
+
 	$scope.closeModal = function () {
 		$modalInstance.dismiss();
 	};
 
 	$scope.saveEdit = function () {
+		/*console.log(item._id+', '+$scope.recipeIngredients);*/
 		item.name = $scope.editName;
-		item.description = $scope.editDescription;
-		item.amount = $scope.editAmount;
-		item.section = $scope.editSection;
+		item.ingredients = $scope.recipeIngredients
 		$modalInstance.close(item);
 	}
 

@@ -8,12 +8,15 @@
 		<legend>Add Ingredient</legend>
 		
 		<label for="ingredient-edit">Ingredient</label>
-        <angucomplete id="ex1" placeholder="Search ingredients" pause="100" selectedobject="selectedCountry" localdata="ingredients" searchfields="name" titlefield="name" minlength="1" inputclass="form-control form-control-small"></angucomplete>
+        <angucomplete id="ex1" placeholder="Search ingredients" pause="100" selectedobject="selectedIngredient" localdata="allIngredients" searchfields="name" titlefield="name" minlength="1" inputclass="form-control form-control-small"></angucomplete>
 		<label for="amount-edit">Amount</label><input type="text" ng-model="editAmount" id="amount-edit">
 		<button ng-click="addIngredient()" class="btn btn-default">Add <span class="glyphicon glyphicon-plus"></span></button>
 	</fieldset>
 
 	<h3>Ingredients</h3>
+		<ul class="listOfTypes">
+			<li ng-repeat="ingredient in recipeIngredients | orderBy:predicate" class="col-xs-12 col-sm-5 col-md-2 col-lg-2">{{ingredient.name}} / {{ingredient.amount}}</li>
+		</ul>
 	
 </div>
 <div class="modal-footer">
