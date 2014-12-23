@@ -1,1 +1,1 @@
-var app = angular.module('beerrun', ['ngResource', 'ui.bootstrap', 'ngRoute']);
+var app = angular.module('beerrun', ['ngResource', 'ui.bootstrap', 'ngRoute', 'angucomplete']);

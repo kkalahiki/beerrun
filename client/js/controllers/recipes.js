@@ -12,6 +12,10 @@ app.controller('recipes', ['$scope', '$resource', '$modal', function($scope, $re
 	    }
 	});
 
+	$resource('api/ingredients/').query(function (results) {
+		$scope.ingredients = results;
+	});
+
 	Type.query(function (results) {
 		$scope.types = results;
 	});
@@ -28,11 +32,14 @@ app.controller('recipes', ['$scope', '$resource', '$modal', function($scope, $re
 	$scope.inEdit = function () {
 		var editItem = this.type;
 		var modalInstance = $modal.open({
-			templateUrl: '/views/templates/editModal.html',
-			controller: 'editModal',
+			templateUrl: '/views/templates/recipeModal.html',
+			controller: 'recipeModal',
 			resolve: {
 				item: function () {
 					return editItem;
+				},
+				ingredients: function () {
+					return $scope.ingredients;
 				}
 			}
 		});
@@ -76,8 +83,9 @@ app.controller('recipes', ['$scope', '$resource', '$modal', function($scope, $re
 	}
 }]);
 
-app.controller('editModal', function ($scope, $modalInstance, item) {
+app.controller('recipeModal', function ($scope, $modalInstance, item, ingredients) {
 	$scope.item = item;
+	$scope.ingredients = ingredients;
 	$scope.predicate = 'name';
 
 	$scope.editName = item.name;

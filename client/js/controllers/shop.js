@@ -52,6 +52,21 @@ app.controller('shop', ['$scope', '$resource', '$modal', function($scope, $resou
 
 	}
 
+	$scope.showInfo = function () {
+		var item = this.type;
+		var modalInstance = $modal.open({
+			templateUrl: '/views/templates/infoModal.html',
+			controller: 'showInfoModal',
+			size: 'large',
+			resolve: {
+				item: function () {
+					return item;
+				}
+			}
+		});
+		
+	}
+
 	$scope.deleteItem = function () {
 		var item = this.type;
 		/*var modalInstance = $modal.open({
@@ -110,7 +125,6 @@ app.controller('editModal', function ($scope, $modalInstance, item) {
 });
 
 app.controller('deleteDialogModal', function ($scope, $modalInstance, item) {
-	console.log(item);
 	$scope.closeModal = function () {
 		$modalInstance.dismiss();
 	};
@@ -118,5 +132,13 @@ app.controller('deleteDialogModal', function ($scope, $modalInstance, item) {
 	$scope.doDelete = function () {
 		$modalInstance.close(item);
 	}
+
+});
+
+app.controller('showInfoModal', function ($scope, $modalInstance, item) {
+	$scope.item = item;
+	$scope.closeModal = function () {
+		$modalInstance.dismiss();
+	};
 
 });
