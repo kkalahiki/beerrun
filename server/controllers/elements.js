@@ -5,10 +5,10 @@ module.exports.create = function (req, res, element) {
 	var type = new Type[element](req.body);
 	type.needed = true;
 	type.save(function (err, result) {
-		//res.json(result);
-		Type[element].find(function (err, results) {
+		res.json(result);
+		/*Type[element].find(function (err, results) {
 			res.json({'resultSet':results});
-		});
+		});*/
 	});
 }
 

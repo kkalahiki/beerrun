@@ -4,10 +4,11 @@ var express 				= require('express'),
 	mongoose 				= require('mongoose'),
 	bodyParser				= require('body-parser'),
 	jsonParser				= bodyParser.json(),
+	env						= require('./env.properties.js'),
 	elementsController		= require('./server/controllers/elements.js'),
 	shopController			= require('./server/controllers/shop.js');;
 
-mongoose.connect('mongodb://localhost:27017/beerrun');
+mongoose.connect('mongodb://'+env.host+':27017/beerrun');
 
 app.get('/', function (req, res) {res.sendFile(__dirname + '/client/views/index.html')});
 

@@ -6,7 +6,8 @@
 			</form>
 			
 			<ul class="listOfTypes">
-				<li ng-repeat="type in types | orderBy:predicate" class="col-xs-12 col-sm-5 col-md-3 col-lg-2">{{type.name}}
+				<li ng-repeat="type in types | orderBy:predicate" class="col-xs-12 col-sm-5 col-md-3 col-lg-2"><label>{{type.name}}
+					<input type="checkbox" class="childCheckbox" ng-model="needIt" ng-click="setNeed($event)" ng-checked="type.needed" /></label>
 					<div class="itemButtons">
 						<button ng-click="inEdit()" class="btn btn-default">Edit <span class="glyphicon glyphicon-pencil"></span></button>
 						<button ng-click="deleteItem()" class="btn btn-default">Delete <span class="glyphicon glyphicon-remove"></span></button>

@@ -77,27 +77,59 @@ app.controller('recipes', ['$scope', '$resource', '$modal', function($scope, $re
 			});
 	    });
 	}
+
+	$scope.setNeed = function ($event) {
+		if ($event.target.checked) { 
+			angular.element($event.target).parent().parent().addClass('checked')
+			var type = new Type();
+			type.needed = true;
+			type.$update({'id': this.type._id}, function (result) {
+				$scope.types = result.resultSet;
+			});
+		}
+		else {
+			angular.element($event.target).parent().parent().removeClass('checked');
+			var type = new Type();
+			type.needed = false;
+			type.$update({'id': this.type._id}, function (result) {
+				$scope.types = result.resultSet;
+			});
+		}
+	}
+
 }]);
 
-app.controller('recipeModal', function ($scope, $modalInstance, item, ingredients) {
+
+
+app.controller('recipeModal', function ($scope, $resource, $modalInstance, item, ingredients) {
 	$scope.item = item;
 	$scope.allIngredients = ingredients;
 	$scope.predicate = 'name';
 	$scope.recipeIngredients = item.ingredients;
 
 	$scope.editName = item.name;
-	if (item.description) {
-		$scope.editDescription = item.description;	
+	if (item.url) {
+		$scope.editURL = item.url;	
 	}
 	
 	$scope.addIngredient = function () {
-		//console.log($scope.selectedIngredient);
 		var thisItem = {};
-		thisItem.name = $scope.selectedIngredient.title;
-		thisItem.amount = $scope.editAmount;
-		thisItem.id = $scope.selectedIngredient.originalObject._id;
-		$scope.recipeIngredients.push(thisItem);
-		//console.log($scope.recipeIngredients);
+		if (thisItem.name) {
+			thisItem.name = $scope.selectedIngredient.title;
+			thisItem.amount = $scope.editAmount;
+			thisItem.id = $scope.selectedIngredient.originalObject._id;
+			$scope.recipeIngredients.push(thisItem);
+
+		}
+		else {
+			/*var thisItem = $resource('api/ingredients/');*/
+			var thisItem = new app.ingredients.Type();
+			thisItem.name = $scope.searchStr;
+			thisItem.amount = $scope.editAmount;
+			thisItem.$save(function (result) {
+				$scope.recipeIngredients.push(result);
+			});
+		}
 	}
 
 	$scope.closeModal = function () {
@@ -105,7 +137,6 @@ app.controller('recipeModal', function ($scope, $modalInstance, item, ingredient
 	};
 
 	$scope.saveEdit = function () {
-		/*console.log(item._id+', '+$scope.recipeIngredients);*/
 		item.name = $scope.editName;
 		item.ingredients = $scope.recipeIngredients
 		$modalInstance.close(item);

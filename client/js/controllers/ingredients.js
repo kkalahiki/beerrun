@@ -20,7 +20,8 @@ app.controller('ingredients', ['$scope', '$resource', '$modal', function($scope,
 		var type = new Type();
 		type.name = $scope.newType;
 		type.$save(function (result) {
-			$scope.types = result.resultSet;
+			$scope.types.push(result);
+			console.log($scope.types);
 			$scope.newType = '';
 		});
 	}

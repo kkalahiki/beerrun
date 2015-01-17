@@ -63,3 +63,7 @@ label {
 .glyphicon {
 	margin-left: 10px;
 }
+
+#directions-edit {
+	width: 100%;
+}

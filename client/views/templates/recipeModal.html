@@ -17,6 +17,9 @@
 		<ul class="listOfTypes">
 			<li ng-repeat="ingredient in recipeIngredients | orderBy:predicate" class="col-xs-12 col-sm-5 col-md-2 col-lg-2">{{ingredient.name}} / {{ingredient.amount}}</li>
 		</ul>
+
+	<label for="directions-edit">Directions</label>
+	<div text-angular="text-angular" name="htmlcontent" ng-model="htmlcontent" ta-disabled='disabled'></div>
 	
 </div>
 <div class="modal-footer">
