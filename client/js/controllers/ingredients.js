@@ -41,9 +41,9 @@ app.controller('ingredients', ['$scope', '$resource', '$modal', function($scope,
 		modalInstance.result.then(function (editItem) {
 			var type = new Type();
 			type.name = editItem.name;
-			if (editItem.description) { type.description = editItem.description };
-			if (editItem.amount) { type.amount = editItem.amount };
-			if (editItem.section) { type.section = editItem.section };
+			type.section = editItem.section;
+			if (editItem.description ? type.description = editItem.description : type.description = '' );
+			if (editItem.amount ? type.amount = editItem.amount : type.amount = '' );
 			type.$update({'id': editItem._id}, function (result) {
 				//Type.query(function (results) {
 					$scope.types = result.resultSet;
@@ -102,25 +102,39 @@ app.controller('editModal', function ($scope, $modalInstance, item) {
 	$scope.item = item;
 	$scope.predicate = 'name';
 
-	$scope.editName = item.name;
-	if (item.description) {
-		$scope.editDescription = item.description;	
-	}
-	if (item.amount) {
-		$scope.editAmount = item.amount;	
-	}
-	if (item.section) {
-		$scope.editSection = item.section;	
-	}
+	if (!item.section) {$scope.item.section = 'other'};
+
+	// move the sections out of here
+	$scope.sections = [
+		{name: 'bakery', value:'Bakery'},
+		{name: 'baking', value:'Baking Supplies'},
+		{name: 'bread', value:'Bread'},
+		{name: 'beer', value: 'Beer'},
+		{name: 'bulk', value: 'Bulk'},
+		{name: 'cereal', value: 'Cereal'},
+		{name: 'cheese', value: 'Cheese'},
+		{name: 'coffee', value:'Coffee'},
+		{name: 'crackers', value:'Crackers'},
+		{name: 'dairy', value: 'Dairy'},
+		{name: 'deli', value: 'Deli'},
+		{name: 'frozen', value: 'Frozen'},
+		{name: 'grains', value: 'Grains'},
+		{name: 'health', value: 'Health and Beauty'},
+		{name: 'house', value: 'Household'},
+		{name: 'meat', value: 'Meat'},
+		{name: 'pasta', value:'Pasta'},
+		{name: 'produce', value: 'Produce'},
+		{name: 'snacks', value: 'Snacks'},
+		{name: 'spices', value:'Spices'},
+		{name: 'liquor', value:'Wine and Liquor'},
+		{name: 'other', value: 'Other'}
+	];
+
 	$scope.closeModal = function () {
 		$modalInstance.dismiss();
 	};
 
 	$scope.saveEdit = function () {
-		item.name = $scope.editName;
-		item.description = $scope.editDescription;
-		item.amount = $scope.editAmount;
-		item.section = $scope.editSection;
 		$modalInstance.close(item);
 	}
 

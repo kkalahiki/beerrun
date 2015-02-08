@@ -1,5 +1,5 @@
 app.controller('shop', ['$scope', '$resource', '$modal', function($scope, $resource, $modal){
-	$scope.predicate = 'name';
+	$scope.predicate = ['section','name'];
 	
 	var Type = $resource('/api/shop/:id', {id: '@id'}, {
 		update: {
