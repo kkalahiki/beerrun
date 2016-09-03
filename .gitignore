@@ -1,5 +1,8 @@
-tmp
-tmp
 node_modules
-node_modules
-env.properties.js
+node_modules.tar
+dist
+.tmp
+tmp
+.DS_Store
+bower_components
+library

@@ -23,6 +23,7 @@ app.controller('ingredients', ['$scope', '$resource', '$modal', function($scope,
 			$scope.types.push(result);
 			console.log($scope.types);
 			$scope.newType = '';
+			angular.element(document.getElementById('banner-holder')).append('<div role="alert">'+type.name+' added</div>');
 		});
 	}
 

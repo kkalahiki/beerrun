@@ -1,6 +1,6 @@
 var express 				= require('express'),
 	app 					= express(),
-	port 					= 3001,
+	port 					= 3002,
 	mongoose 				= require('mongoose'),
 	bodyParser				= require('body-parser'),
 	jsonParser				= bodyParser.json(),
