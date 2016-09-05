@@ -38,3 +38,31 @@ module.exports.delete = function (req, res, element) {
 		});
 	});
 }
+
+module.exports.alexa = function (req, res, element) {
+	var responseList = '';
+	var ingredients = Type[element].find(function (err, results) {
+		/*console.log(results);*/
+		for (var i=0; i<results.length; i++) {
+			responseList += results[i].name+' ';
+		}
+
+		var responseBody = {
+		  "version": "1.0",
+		  "response": {
+		    "outputSpeech": {
+		      "type": "PlainText",
+		      "text": responseList
+		    },
+		    "shouldEndSession": true
+		  }
+		};
+		/*res.json(results);*/
+		res.json(responseBody);
+	});
+
+	
+
+	/*res.json(responseBody);*/
+
+}

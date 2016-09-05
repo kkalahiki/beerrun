@@ -43,6 +43,9 @@ app.get('/api/recipes', jsonParser, function (req, res) { elementsController.rea
 app.put('/api/recipes/*', jsonParser, function (req, res) { elementsController.update(req, res, 'recipes') });
 app.delete('/api/recipes/*', jsonParser, function (req, res) { elementsController.delete(req, res, 'recipes') });
 
+// Alexa
+app.get('/api/alexaSkills', jsonParser, function (req, res) { elementsController.alexa(req, res, 'ingredients') });
+app.post('/api/alexaSkills', jsonParser, function (req, res) { elementsController.alexa(req, res, 'ingredients') });
 
 app.use('/js', express.static(__dirname + '/client/js'));
 app.use('/views', express.static(__dirname + '/client/views'));
