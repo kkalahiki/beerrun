@@ -6,9 +6,17 @@ var express 				= require('express'),
 	jsonParser				= bodyParser.json(),
 	env						= require('./env.properties.js'),
 	elementsController		= require('./server/controllers/elements.js'),
-	shopController			= require('./server/controllers/shop.js');;
+	shopController			= require('./server/controllers/shop.js'),
+	http					= require('http'),
+	https					= require('https'),
+	fs						= require('fs');
 
 mongoose.connect('mongodb://'+env.host+':27017/beerrun');
+
+var options = {
+   key  : fs.readFileSync('fixtures/server.key'),
+   cert : fs.readFileSync('fixtures/server.crt')
+};
 
 app.get('/', function (req, res) {res.sendFile(__dirname + '/client/views/index.html')});
 
@@ -43,6 +51,14 @@ app.use('/images', express.static(__dirname + '/client/images'));
 app.use('/thirdparty', express.static(__dirname + '/client/thirdparty'));
 app.use('/bower_components', express.static(__dirname + '/client/bower_components'));
 
-app.listen(port, function () {
+/*app.listen(port, function () {
 	console.log('listening')
-})
+})*/
+
+/*http.createServer(app).listen(port);*/
+
+/*https.createServer(options, app).listen(port);*/
+
+https.createServer(options, app).listen(port, function () {
+   console.log('Started!');
+});
