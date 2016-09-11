@@ -58,10 +58,10 @@ app.use('/bower_components', express.static(__dirname + '/client/bower_component
 	console.log('listening')
 })*/
 
-/*http.createServer(app).listen(port);*/
+http.createServer(app).listen(port);
 
 /*https.createServer(options, app).listen(port);*/
 
-https.createServer(options, app).listen(port, function () {
+/*https.createServer(options, app).listen(port, function () {
    console.log('Started!');
-});
+});*/

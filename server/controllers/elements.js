@@ -40,19 +40,27 @@ module.exports.delete = function (req, res, element) {
 }
 
 module.exports.alexa = function (req, res, element) {
+	var shoppingListCopy = "Your shopping list currently has the following items in it: ";
 	var responseList = '';
+	var firstItem = true;
+	var delimiter = '';
 	var ingredients = Type[element].find(function (err, results) {
 		/*console.log(results);*/
 		for (var i=0; i<results.length; i++) {
-			responseList += results[i].name+' ';
+			if(results[i].needed === true) {
+				responseList += delimiter + results[i].name+' ';
+				if (firstItem) {
+					delimiter = ', ';
+				}
+			}
 		}
 
 		var responseBody = {
 		  "version": "1.0",
 		  "response": {
 		    "outputSpeech": {
-		      "type": "PlainText",
-		      "text": responseList
+		      "type": "SSML",
+		      "text": "<speak>"+shoppingListCopy+responseList+"</speak>"
 		    },
 		    "shouldEndSession": true
 		  }
